@@ -19,5 +19,6 @@ void setup() {
 
 void loop() {
     print_POST(host, port, post_data);
+    // print_GET(host, port);
     delay(5000);
 }
