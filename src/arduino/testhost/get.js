@@ -6,8 +6,9 @@ http.createServer(function(req, res){
     res.writeHead(200, {'Content-Type': 'text/plain'});
  
     // parse url param
-    var params = url.parse(req.url, true).query;
-    res.write("get_data: " + params.get_data);
+    // var params = url.parse(req.url, true).query;
+    // res.write("get_data: " + params.get_data);
+    res.write("Hello World!");
     res.end();
  
 }).listen(3000);
