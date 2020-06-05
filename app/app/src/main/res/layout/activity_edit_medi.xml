@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".EditPay">
+    tools:context=".EditMedi">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appBarLayout"
@@ -28,14 +28,15 @@
         android:layout_marginTop="20dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp">
+
         <TextView
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="match_parent"
-            android:text="@string/date"
+            android:layout_weight="1"
             android:gravity="center"
-            android:textSize="16sp"
-            />
+            android:text="@string/date"
+            android:textSize="16sp" />
+
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -71,7 +72,7 @@
                 android:layout_height="match_parent"
                 android:inputType="text"
                 android:maxLength="20"
-                android:id="@+id/item_spend"
+                android:id="@+id/medi_name"
                 android:maxLines="1"
                 />
         </android.support.design.widget.TextInputLayout>
@@ -83,14 +84,14 @@
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:layout_marginTop="20dp">
+
         <TextView
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="match_parent"
-            android:text="@string/money"
+            android:layout_weight="1"
             android:gravity="center"
-            android:textSize="16sp"
-            />
+            android:text="服用剂量"
+            android:textSize="16sp" />
         <android.support.design.widget.TextInputLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -100,7 +101,7 @@
                 android:layout_height="match_parent"
                 android:inputType="numberDecimal"
                 android:maxLength="20"
-                android:id="@+id/money"
+                android:id="@+id/dosage"
                 android:maxLines="1"
                 />
         </android.support.design.widget.TextInputLayout>
@@ -112,14 +113,15 @@
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:layout_marginTop="20dp">
+
         <TextView
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="match_parent"
-            android:text="@string/time"
+            android:layout_weight="1"
             android:gravity="center"
-            android:textSize="16sp"
-            />
+            android:text="服药间隔（h）"
+            android:textSize="16sp" />
+
         <android.support.design.widget.TextInputLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -175,12 +177,21 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/imageView8"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="14dp"
+            app:srcCompat="@drawable/medecine" />
+
         <ImageButton
+            android:id="@+id/ok"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_centerInParent="true"
             android:background="@drawable/ok"
-            android:src="@drawable/baseline_check_24"
-            android:id="@+id/ok"/>
+            android:src="@drawable/baseline_check_24" />
     </RelativeLayout>
 </LinearLayout>

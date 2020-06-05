@@ -3,6 +3,6 @@
     <dbname value="myPay" />
     <version value="1" />
     <list>
-        <mapping class = "com.example.kingqi.paykeep.Pay"/>
+        <mapping class = "com.example.qingnang.Medi"/>
     </list>
 </litepal>

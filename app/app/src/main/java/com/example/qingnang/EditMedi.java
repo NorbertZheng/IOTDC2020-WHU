@@ -1,19 +1,13 @@
-package com.example.kingqi.paykeep;
+package com.example.qingnang;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
-import android.support.design.widget.TextInputEditText;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.design.widget.TextInputEditText;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageButton;
-import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,43 +20,40 @@ import java.util.Date;
 
 import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
 
-public class EditPay extends SwipeBackActivity {
+public class EditMedi extends SwipeBackActivity {
 
     private TextView date ;
-    private TextInputEditText item_spend , money;
-    private RadioButton yes,no;
+    private TextInputEditText medi_name , dosage, time;
     private ImageButton button;
-    private Pay pay;
-    private static final String TAG = "EditPay";
+    private Medi medi;
+    private static final String TAG = "EditMedi";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_pay);
+        setContentView(R.layout.activity_edit_medi);
         init();
     }
     private void init(){
         setSwipeBackEnable(true);
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
-        toolbar.setTitle("Add Medicine");
+        toolbar.setTitle("添加药品");
         setSupportActionBar(toolbar);
 
         date=(TextView)findViewById(R.id.date);
-        item_spend = (TextInputEditText)findViewById(R.id.item_spend);
-        money = (TextInputEditText)findViewById(R.id.money);
-//        yes = (RadioButton) findViewById(R.id.yes);
-//        no = (RadioButton)findViewById(R.id.no);
-//        no.setChecked(true);
+        medi_name = (TextInputEditText)findViewById(R.id.medi_name);
+        dosage = (TextInputEditText)findViewById(R.id.dosage);
+        time = (TextInputEditText)findViewById(R.id.time);
         button = (ImageButton)findViewById(R.id.ok);
 
-        pay = new Pay();
+        medi = new Medi();
 
         Calendar calendar = Calendar.getInstance();
         final int year = calendar.get(Calendar.YEAR);
-        pay.setYear(year);
+        medi.setYear(year);
         int month = calendar.get(Calendar.MONTH)+1;
-        pay.setMonth(month);
+        medi.setMonth(month);
         int day = calendar.get(Calendar.DAY_OF_MONTH);
-        pay.setDay(day);
+        medi.setDay(day);
         date.setText(year+"/"+month+"/"+day);
         date.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,23 +64,21 @@ public class EditPay extends SwipeBackActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (item_spend.getText().toString().trim().isEmpty()){
-                    Toast.makeText(EditPay.this,"请输入药品名称",Toast.LENGTH_SHORT).show();
+                if (medi_name.getText().toString().trim().isEmpty()){
+                    Toast.makeText(EditMedi.this,"请输入药品名称",Toast.LENGTH_SHORT).show();
                     return;
                 }
-                String t = money.getText().toString().trim();
+                String t = dosage.getText().toString().trim();
                 if (t.isEmpty()){
-                    Toast.makeText(EditPay.this,"请输入药品每顿服用数量",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(EditMedi.this,"请输入药品每顿服用数量",Toast.LENGTH_SHORT).show();
                     return;
                 }
-                pay.setName(item_spend.getText().toString());
-                pay.setMoney(Double.valueOf(t));
-//                if (yes.isChecked())
-//                    pay.setPrivate(true);
-//                else
-//                    pay.setPrivate(false);
+                String tt = time.getText().toString().trim();
+                medi.setName(medi_name.getText().toString());
+                medi.setDosage(Double.valueOf(t));
+                medi.setTime(Integer.valueOf(tt));
                 Intent intent = new Intent();
-                intent.putExtra("pay",pay);
+                intent.putExtra("medi",medi);
                 setResult(RESULT_OK,intent);
                 finish();
             }
@@ -100,28 +89,20 @@ public class EditPay extends SwipeBackActivity {
         if (inputMethodManager.isActive()){
             inputMethodManager.hideSoftInputFromWindow(date.getApplicationWindowToken(),0);
         }
-        TimePickerView timePickerView = new TimePickerBuilder(EditPay.this, new OnTimeSelectListener() {
+        TimePickerView timePickerView = new TimePickerBuilder(EditMedi.this, new OnTimeSelectListener() {
             @Override
             public void onTimeSelect(Date d, View v) {
                 Calendar calendar = Calendar.getInstance();
                 calendar.setTime(d);
                 int year = calendar.get(Calendar.YEAR);
-                pay.setYear(year);
+                medi.setYear(year);
                 int month = calendar.get(Calendar.MONTH)+1;
-                pay.setMonth(month);
+                medi.setMonth(month);
                 int day = calendar.get(Calendar.DAY_OF_MONTH);
-                pay.setDay(day);
+                medi.setDay(day);
                 date.setText(year+"/"+month+"/"+day);
             }
         }).build();
         timePickerView.show();
-    }
-    protected void fitWindows(){
-        Window window = getWindow();//设置系统栏是否适应的
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            window.setFlags(
-                    WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS,
-                    WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        }
     }
 }

@@ -1,9 +1,8 @@
-package com.example.kingqi.paykeep;
+package com.example.qingnang;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,17 +10,15 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import static android.content.ContentValues.TAG;
-
-public class PayAdapter extends RecyclerView.Adapter<PayAdapter.ViewHolder>{
-    private List<Pay> payList;
-    public PayAdapter(List<Pay> payList){
-        this.payList = payList;
+public class MediAdapter extends RecyclerView.Adapter<MediAdapter.ViewHolder>{
+    private List<Medi> mediList;
+    public MediAdapter(List<Medi> mediList){
+        this.mediList = mediList;
     }
 
     public interface OnItemOnClickListener{
-        void onItemOnClick(View view,int pos);
-        void onItemLongOnClick(View view ,int pos);
+        void onItemOnClick(View view, int pos);
+        void onItemLongOnClick(View view, int pos);
     }
     private OnItemOnClickListener mOnItemOnClickListener;
     public void setOnItemClickListener(OnItemOnClickListener listener){
@@ -29,32 +26,34 @@ public class PayAdapter extends RecyclerView.Adapter<PayAdapter.ViewHolder>{
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView itemSpend,money,date;
+        public TextView medi_name,dosage,date,time;
         public ViewHolder(View itemView) {
             super(itemView);
-            itemSpend = (TextView)itemView.findViewById(R.id.item_spend);
-            money = (TextView)itemView.findViewById(R.id.money);
-            date = (TextView)itemView.findViewById(R.id.date);
+            medi_name = itemView.findViewById(R.id.medi_name);
+            dosage = itemView.findViewById(R.id.dosage);
+            time = itemView.findViewById(R.id.time);
+            date = itemView.findViewById(R.id.date);
         }
     }
 
     @NonNull
     @Override
-    public PayAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public MediAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater layoutInflater = LayoutInflater.from(context);
-        View view = layoutInflater.inflate(R.layout.item_pay,parent,false);
+        View view = layoutInflater.inflate(R.layout.item,parent,false);
         ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder,final int position) {
-        Pay pay = payList.get(position);
-        TextView itemSpend = holder.itemSpend, money = holder.money, date = holder.date;
-        itemSpend.setText(pay.getName());
-        money.setText(String.valueOf(pay.getMoney()));
-        String t = pay.getYear() + "/" + pay.getMonth() + "/" + pay.getDay();
+        Medi medi = mediList.get(position);
+        TextView medi_name = holder.medi_name, dosage = holder.dosage, time = holder.time,date = holder.date;
+        medi_name.setText(medi.getName());
+        dosage.setText(String.valueOf(medi.getDosage()));
+        time.setText(String.valueOf(medi.gettime()));
+        String t = medi.getYear() + "/" + medi.getMonth() + "/" + medi.getDay();
         date.setText(t);
         if (mOnItemOnClickListener != null){
             holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -74,10 +73,10 @@ public class PayAdapter extends RecyclerView.Adapter<PayAdapter.ViewHolder>{
     }
     @Override
     public int getItemCount() {
-        return payList.size();
+        return mediList.size();
     }
     public void removeItem(int pos){
-        payList.remove(pos);
+        mediList.remove(pos);
         notifyItemRemoved(pos);
     }
 }
