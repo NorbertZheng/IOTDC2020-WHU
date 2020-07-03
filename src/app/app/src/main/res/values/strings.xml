@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">青囊</string>
+    <string name="action_settings">Settings</string>
+    <string name="item_spend">药品名称</string>
+    <string name="money">服用数量</string>
+    <string name="date">添加日期</string>
+    <string name="textview">TextView</string>
+    <string name="mediinfo">药物信息</string>
+    <string name="oldinfo">老人信息</string>
+    <string name="time">服用时间</string>
+    <string name="name">老人姓名：</string>
+    <string name="age">老人年龄：</string>
+    <string name="height">老人身高：</string>
+    <string name="weight">老人体重：</string>
+    <string name="birthdate">出生日期：</string>
+    <string name="room">地址住址：</string>
+    <string name="phone">联系方式：</string>
+    <string name="checkinfo">药盒状态</string>
+    <string name="text">青囊药盒</string>
+    <string name="boxstate">药盒状态及服药信息</string>
+
+</resources>
